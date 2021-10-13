@@ -15,6 +15,9 @@ namespace CoolMathForGames
         private Scene[] _scenes = new Scene[0];
         private static Icon[,] _buffer;
 
+        private Actor[,] _walls; 
+
+
         /// <summary>
         /// Called to begin the application 
         /// </summary>
@@ -45,18 +48,26 @@ namespace CoolMathForGames
             Scene scene = new Scene();
 
             //Creats thr actors starting position
-            Actor actor = new Actor('E', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Axtor1", ConsoleColor.Magenta);
-            Actor actor2 = new Actor('R', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Axtor2", ConsoleColor.Green);
+            Actor actor = new Actor('W', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Magenta);
+            Actor actor2 = new Actor('R', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Actor2", ConsoleColor.Green);
 
-            Player player = new Player('W', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
+            Player player = new Player('P', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
 
             scene.AddActor(actor);
             scene.AddActor(actor2);
             scene.AddActor(player);
 
-            _currentSceneIndex = AddScene(scene);
+            BuildingWalls(30);
+            
+            for (int x = 0; x < _walls.GetLength(0); x++)
+                for (int y = 0; y < _walls.GetLength(1); y++)
+                {
+                    if (_walls[x,y] != null)
+                        scene.AddActor(_walls[x, y]);
+                }
 
-            _scenes[_currentSceneIndex].Update();
+
+            _currentSceneIndex = AddScene(scene);
 
 
         }
@@ -115,6 +126,27 @@ namespace CoolMathForGames
             _scenes[_currentSceneIndex].End();
         }
 
+        /// <summary>
+        /// Creats walls around the grid
+        /// </summary>
+        /// <param name="size">Size of the walls</param>
+        private void BuildingWalls(int size)
+        {
+            Actor[,] wallBilder = new Actor[size, size ];
+
+            for (int x = 0; x < wallBilder.GetLength(0); x++)
+                for (int y = 0; y < wallBilder.GetLength(1); y++)
+                { 
+                    if (x == 0 || x == (wallBilder.GetLength(1) - 1))
+                        wallBilder[x, y] = new Actor('♥', x, y, "Wall", ConsoleColor.White);
+
+                    else if(y == 0 || y == (wallBilder.GetLength(0) - 1))
+                        wallBilder[x, y] = new Actor('♠', x, y, "Wall", ConsoleColor.White);
+                    else if( y > 0 || y < size - 3)
+                        wallBilder[x, y] = new Actor('♣', x, y, "Wall", ConsoleColor.White);
+        }
+                _walls = wallBilder;
+        }
         /// <summary>
         /// Created to append new scnene to the current listing of scene 
         /// </summary>
@@ -181,6 +213,9 @@ namespace CoolMathForGames
         {
             _applicationShouldClose = true;
         }
+
+
+
     }
 
 }

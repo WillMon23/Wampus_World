@@ -52,6 +52,14 @@ namespace CoolMathForGames
         
         public Icon Icon { get { return _icon; } }
 
+        /// <summary>
+        /// Defult Contructor
+        /// </summary>
+        public Actor()
+        {
+
+        }
+
         public Actor(char icon, Vector2 position, string name = "Actor", ConsoleColor color = ConsoleColor.DarkRed)
         {
             _icon = new Icon { Symbol = icon, Color = color }; 
@@ -62,6 +70,7 @@ namespace CoolMathForGames
         public Actor(char icon, float x, float y, string name = "Actor", ConsoleColor color = ConsoleColor.DarkRed) :
             this(icon, new Vector2 { X = x, Y = y }, name, color){ }
 
+      
         public virtual void Start()
         {
             _started = true;
@@ -84,7 +93,7 @@ namespace CoolMathForGames
 
         public virtual void OnCollision( Actor actor)
         {
-
+            
         }
 
 

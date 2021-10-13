@@ -21,6 +21,12 @@ namespace CoolMathForGames
             
         }
 
+        public override void Start()
+        {
+            base.Start();
+            Volocity = new Vector2 { X = 2, Y = 2 };
+        }
+
         public override void Update()
         {
             Vector2 moveDirecton = new Vector2();
@@ -49,10 +55,13 @@ namespace CoolMathForGames
         public override void OnCollision(Actor actor)
         {
             if (actor.Icon == 'R')
-                Volocity *= -1;
-                
-        }
+                Posistion -= Volocity;
+            else
+            {
+                Console.WriteLine("Error");
+            }
 
+        }
 
     }
 }
