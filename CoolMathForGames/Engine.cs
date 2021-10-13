@@ -45,10 +45,10 @@ namespace CoolMathForGames
             Scene scene = new Scene();
 
             //Creats thr actors starting position
-            Actor actor = new Actor('P', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Axtor1", ConsoleColor.Magenta);
-            Actor actor2 = new Actor('A', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Axtor2", ConsoleColor.Green);
+            Actor actor = new Actor('E', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Axtor1", ConsoleColor.Magenta);
+            Actor actor2 = new Actor('R', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Axtor2", ConsoleColor.Green);
 
-            Player player = new Player('@', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
+            Player player = new Player('W', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
 
             scene.AddActor(actor);
             scene.AddActor(actor2);

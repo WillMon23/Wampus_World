@@ -9,6 +9,32 @@ namespace CoolMathForGames
     {
         public char Symbol;
         public ConsoleColor Color;
+
+        /// <summary>
+        /// Overrides the equals equals oporator in order to
+        /// checks to see if the left hand side vector X and Y 
+        /// matches the X and Y on the right hand side
+        /// </summary>
+        /// <param name="lhs">left hand side vector </param>
+        /// <param name="rhs">right hand side vector</param>
+        /// <returns>if there equal to each other</returns>
+        public static bool operator ==(Icon lhs, char rhs)
+        {
+            return (lhs.Symbol == rhs && lhs.Symbol == rhs);
+        }
+
+        /// <summary>
+        /// Overrides the not equals oporator in order to
+        /// checks to see if the left hand side vector X and Y 
+        /// does not match the X and Y on the right hand side
+        /// </summary>
+        /// <param name="lhs">left hand side vector </param>
+        /// <param name="rhs">right hand side vector</param>
+        /// <returns>if there not equal to each other</returns>
+        public static bool operator !=(Icon lhs, char rhs)
+        {
+            return (lhs.Symbol != rhs || lhs.Symbol != rhs);
+        }
     }
     class Actor
     {
@@ -58,7 +84,7 @@ namespace CoolMathForGames
 
         public virtual void OnCollision( Actor actor)
         {
-            Engine.CloseApplication();
+
         }
 
 

@@ -41,8 +41,16 @@ namespace CoolMathForGames
 
             Volocity =  moveDirecton * Speed;
 
-            Posistion = new Vector2 { X = Posistion.X + Volocity.X, Y = Posistion.Y + Volocity.Y };
+            Posistion += Volocity; 
 
+        }
+
+
+        public override void OnCollision(Actor actor)
+        {
+            if (actor.Icon == 'R')
+                Volocity *= -1;
+                
         }
 
 
