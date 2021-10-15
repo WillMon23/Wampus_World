@@ -9,10 +9,17 @@ namespace CoolMathForGames
     {
         private float _speed;
         private Vector2 _volocity;
+        private float _health;
+        private int _lives;
+
+        public float Health { get { return _health; } }
+
+        public int Lives { get { return _lives; } }
         
         public float Speed { get { return _speed; } set { _speed = value; } }
 
         public Vector2 Volocity {  get { return _volocity; } set { _volocity = value; } }
+
 
         public Player(char icon, float x, float y, float speed, string name = "Actor", ConsoleColor color = ConsoleColor.DarkRed) 
             :base( icon,  x,  y,  name = "Actor",  color = ConsoleColor.DarkRed)
@@ -50,6 +57,8 @@ namespace CoolMathForGames
             Posistion += Volocity; 
 
         }
+        
+
 
 
         public override void OnCollision(Actor actor)

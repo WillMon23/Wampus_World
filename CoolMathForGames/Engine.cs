@@ -51,14 +51,24 @@ namespace CoolMathForGames
             //Creats thr actors starting position
             Actor actor = new Actor('K', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Magenta);
             Actor actor2 = new Actor('R', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Actor2", ConsoleColor.Green);
+            scene.AddActor(actor);
+            scene.AddActor(actor2);  
 
-            Player player = new Player('P', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
+            Player player = new Player('P', 2, 2, 1, "Player", ConsoleColor.DarkCyan);
+            scene.AddActor(player);
+
 
             Enemy wampus = new Enemy('W', 9, 9, 1, "Wampus", player, ConsoleColor.DarkCyan);
+            scene.AddActor(wampus);
 
-           
 
-            BuildingWalls(30);
+            UIText healthText = new UIText(30, 3, "Health", ConsoleColor.Blue, 20, 1);
+            UIText livesText = new UIText(20, 1, "Lives", ConsoleColor.Red, 10,10 );
+            PlayerHud playerHud = new PlayerHud(player,healthText,livesText);
+
+            scene.AddUIElement(playerHud);
+
+            BuildingWalls(20);
             
             for (int x = 0; x < _walls.GetLength(0); x++)
                 for (int y = 0; y < _walls.GetLength(1); y++)
@@ -66,15 +76,7 @@ namespace CoolMathForGames
                     if (_walls[x,y] != null)
                         scene.AddActor(_walls[x, y]);
                 } 
-            
-            scene.AddActor(actor);
-            scene.AddActor(actor2);
-            scene.AddActor(player);
-            scene.AddActor(wampus);
-
-
-            _currentSceneIndex = AddScene(scene);
-
+             _currentSceneIndex = AddScene(scene);
 
         }
 
@@ -91,6 +93,7 @@ namespace CoolMathForGames
             Console.SetCursorPosition(0, 0);
             //Adds all actor icon to buffer
             _scenes[_currentSceneIndex].Draw();
+            _scenes[_currentSceneIndex].DrawUI();
 
             //Iterate through buffer
             for (int y = 0; y < _buffer.GetLength(1); y++)
@@ -119,6 +122,7 @@ namespace CoolMathForGames
         private void Update()
         {
             _scenes[_currentSceneIndex].Update();
+            _scenes[_currentSceneIndex].UpdateUI();
 
             while (Console.KeyAvailable)
                 Console.ReadKey(true);
@@ -142,15 +146,16 @@ namespace CoolMathForGames
 
             for (int x = 0; x < wallBilder.GetLength(0); x++)
                 for (int y = 0; y < wallBilder.GetLength(1); y++)
-                { 
+                {
                     if (x == 0 || x == (wallBilder.GetLength(1) - 1))
-                        wallBilder[x, y] = new Actor('♥', x, y, "Wall", ConsoleColor.White);
+                        wallBilder[x, y] = new Actor('▌', x, y, "Wall", ConsoleColor.White);
 
-                    else if(y == 0 || y == (wallBilder.GetLength(0) - 1))
-                        wallBilder[x, y] = new Actor('♠', x, y, "Wall", ConsoleColor.White);
-        }
+                    else if (y == 0 || y == (wallBilder.GetLength(0) - 1))
+                        wallBilder[x, y] = new Actor('▄', x, y, "Wall", ConsoleColor.White);
+                }
                 _walls = wallBilder;
         }
+
         /// <summary>
         /// Created to append new scnene to the current listing of scene 
         /// </summary>

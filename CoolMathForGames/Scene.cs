@@ -10,9 +10,11 @@ namespace CoolMathForGames
         /// Array thst contsind all the scenes 
         /// </summary>
         private Actor[] _actors;
+        private Actor[] _UIElements;
         public Scene()
         {
             _actors = new Actor[0];
+            _UIElements = new Actor[0];
         }
 
         /// <summary>
@@ -45,6 +47,18 @@ namespace CoolMathForGames
             }
         }
 
+        public virtual void UpdateUI()
+        {
+
+            for (int i = 0; i < _UIElements.Length; i++)
+            {
+                if (!_UIElements[i].Started)
+                    _UIElements[i].Start();
+
+                _UIElements[i].Update();
+            }
+        }
+
         /// <summary>
         /// Draws the 
         /// </summary>
@@ -53,6 +67,13 @@ namespace CoolMathForGames
             for (int i = 0; i < _actors.Length; i++)
                 _actors[i].Draw();
         }
+
+        public virtual void DrawUI()
+        {
+            for (int i = 0; i < _UIElements.Length; i++)
+                _UIElements[i].Draw();
+        }
+
 
         /// <summary>
         /// Once update ends the 
@@ -82,6 +103,19 @@ namespace CoolMathForGames
             //Set the old array to the new array 
             _actors = tempArray;
         } 
+
+        public virtual void AddUIElement(Actor UI)
+        {
+            Actor[] tempArray = new Actor[_UIElements.Length + 1];
+
+            //Copy all the values from the original array into the temp array
+            for (int i = 0; i < _UIElements.Length; i++)
+                tempArray[i] = _UIElements[i];
+            //Add the new actor to the end of the new array 
+            tempArray[_UIElements.Length] = UI;
+            //Set the old array to the new array 
+            _UIElements = tempArray;
+        }
 
         /// <summary>
         /// Removes ana actor from the arary of actors 
