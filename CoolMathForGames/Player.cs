@@ -56,10 +56,6 @@ namespace CoolMathForGames
         {
             if (actor.Icon == 'R')
                 Posistion -= Volocity;
-            else
-            {
-                Console.WriteLine("Error");
-            }
 
         }
 

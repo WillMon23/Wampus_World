@@ -52,6 +52,8 @@ namespace CoolMathForGames
         
         public Icon Icon { get { return _icon; } }
 
+        public string Name { get { return _name; } }
+
         /// <summary>
         /// Defult Contructor
         /// </summary>

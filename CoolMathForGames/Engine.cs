@@ -18,6 +18,7 @@ namespace CoolMathForGames
         private Actor[,] _walls; 
 
 
+
         /// <summary>
         /// Called to begin the application 
         /// </summary>
@@ -48,14 +49,14 @@ namespace CoolMathForGames
             Scene scene = new Scene();
 
             //Creats thr actors starting position
-            Actor actor = new Actor('W', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Magenta);
+            Actor actor = new Actor('K', new MathLibrary.Vector2 { X = 0, Y = 0 }, "Actor1", ConsoleColor.Magenta);
             Actor actor2 = new Actor('R', new MathLibrary.Vector2 { X = 10, Y = 10 }, "Actor2", ConsoleColor.Green);
 
             Player player = new Player('P', 5, 5, 1, "Player", ConsoleColor.DarkCyan);
 
-            scene.AddActor(actor);
-            scene.AddActor(actor2);
-            scene.AddActor(player);
+            Enemy wampus = new Enemy('W', 9, 9, 1, "Wampus", player, ConsoleColor.DarkCyan);
+
+           
 
             BuildingWalls(30);
             
@@ -64,7 +65,12 @@ namespace CoolMathForGames
                 {
                     if (_walls[x,y] != null)
                         scene.AddActor(_walls[x, y]);
-                }
+                } 
+            
+            scene.AddActor(actor);
+            scene.AddActor(actor2);
+            scene.AddActor(player);
+            scene.AddActor(wampus);
 
 
             _currentSceneIndex = AddScene(scene);
@@ -142,8 +148,6 @@ namespace CoolMathForGames
 
                     else if(y == 0 || y == (wallBilder.GetLength(0) - 1))
                         wallBilder[x, y] = new Actor('♠', x, y, "Wall", ConsoleColor.White);
-                    else if( y > 0 || y < size - 3)
-                        wallBilder[x, y] = new Actor('♣', x, y, "Wall", ConsoleColor.White);
         }
                 _walls = wallBilder;
         }
