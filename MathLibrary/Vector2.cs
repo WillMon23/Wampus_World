@@ -7,6 +7,16 @@ namespace MathLibrary
         public float X;
         public float Y;
 
+
+        public Vector2(float x, float y)
+        {
+            X = x;
+            Y = y;
+        }
+
+
+        public float Magnitude { get { return (float)Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2)); } }
+
         /// <summary>
         /// Overrides the plus oporator in order to add 
         /// two vectors together 
@@ -14,10 +24,28 @@ namespace MathLibrary
         /// <param name="lhs">whats being added on the left hand side</param>
         /// <param name="rhs">whats being added on the right hand side</param>
         /// <returns>the Addition of both vectors</returns>
-        public static Vector2 operator + (Vector2 lhs, Vector2 rhs)
+        public static Vector2 operator +(Vector2 lhs, Vector2 rhs)
         {
             return new Vector2 { X = lhs.X + rhs.X, Y = lhs.Y + rhs.Y };
         }
+
+        public Vector2 Normalized
+        {
+            get
+            {
+                Vector2 value = this;
+                return value.Normalize();
+
+            }
+        }
+
+        public Vector2 Normalize()
+        {
+            if (Magnitude == 0)
+                return new Vector2();
+            return this / Magnitude;
+        }
+    
 
         /// <summary>
         /// Overrides the minus oporator in order to subtract 
@@ -26,7 +54,7 @@ namespace MathLibrary
         /// <param name="lhs">whats being subtract on the left hand side</param>
         /// <param name="rhs">whats being subtract on the right hand side</param>
         /// <returns>the Subtraction of both vectors</returns>
-        public static Vector2 operator - (Vector2 lhs, Vector2 rhs)
+        public static Vector2 operator -(Vector2 lhs, Vector2 rhs)
         {
             return new Vector2 { X = lhs.X - rhs.X, Y = lhs.Y - rhs.Y };
         }
@@ -38,7 +66,7 @@ namespace MathLibrary
         /// <param name="lhs">whats being multiply on the left hand side</param>
         /// <param name="scalar">whats being multiply on the right hand side</param>
         /// <returns>the Multiplication of both vectors</returns>
-        public static Vector2 operator * (Vector2 lhs, float scalar)
+        public static Vector2 operator *(Vector2 lhs, float scalar)
         {
             return new Vector2 { X = lhs.X * scalar, Y = lhs.Y * scalar };
         }
@@ -50,7 +78,7 @@ namespace MathLibrary
         /// <param name="lhs">whats being devide on the left hand side</param>
         /// <param name="rhs">whats being devide on the right hand side</param>
         /// <returns>the Devision of both vectors</returns>
-        public static Vector2 operator / (Vector2 lhs, float scalar)
+        public static Vector2 operator /(Vector2 lhs, float scalar)
         {
             return new Vector2 { X = lhs.X / scalar, Y = lhs.Y / scalar };
         }
@@ -63,7 +91,7 @@ namespace MathLibrary
         /// <param name="lhs">left hand side vector </param>
         /// <param name="rhs">right hand side vector</param>
         /// <returns>if there equal to each other</returns>
-        public static bool operator == (Vector2 lhs, Vector2 rhs)
+        public static bool operator ==(Vector2 lhs, Vector2 rhs)
         {
             return (lhs.X == rhs.X && lhs.Y == rhs.Y);
         }

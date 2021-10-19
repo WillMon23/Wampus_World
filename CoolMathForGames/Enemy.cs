@@ -44,23 +44,15 @@ namespace CoolMathForGames
 
         public override void OnCollision(Actor actor)
         {
-            //if(actor.Name == "Wall")
-               // Posistion -= Volocity;
+            if (actor.Icon == 'P')
+                Posistion = new Vector2(5, 5);
         }
 
         private void Fallow()
         {
-             if (_player.Posistion.X > Posistion.X)
-                    Posistion += new Vector2 { X = 1 };
+            Volocity = _player.Posistion - Posistion;
 
-                if (_player.Posistion.X < Posistion.X)
-                    Posistion += new Vector2 { X = -1 };
-
-                if (_player.Posistion.X > Posistion.X)
-                    Posistion += new Vector2 { Y = 1 };
-
-                if (_player.Posistion.X < Posistion.X)
-                    Posistion += new Vector2 { Y = -1 };
+            Posistion += Volocity.Normalized * Speed;
         }
     }
 }

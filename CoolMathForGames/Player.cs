@@ -32,6 +32,8 @@ namespace CoolMathForGames
         {
             base.Start();
             Volocity = new Vector2 { X = 2, Y = 2 };
+
+            _lives = 3;
         }
 
         public override void Update()
@@ -57,15 +59,15 @@ namespace CoolMathForGames
             Posistion += Volocity; 
 
         }
-        
-
-
 
         public override void OnCollision(Actor actor)
         {
             if (actor.Icon == 'R')
                 Posistion -= Volocity;
-
+            if(actor.Icon == 'W')
+            {
+                _lives--;
+            }
         }
 
     }

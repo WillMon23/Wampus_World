@@ -54,7 +54,7 @@ namespace CoolMathForGames
             scene.AddActor(actor);
             scene.AddActor(actor2);  
 
-            Player player = new Player('P', 2, 2, 1, "Player", ConsoleColor.DarkCyan);
+            Player player = new Player('P', 2, 2, 5, "Player", ConsoleColor.DarkCyan);
             scene.AddActor(player);
 
 
